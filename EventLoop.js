@@ -86,7 +86,7 @@ Promise.resolve('4').then(res => {
 }).then(() => {
   console.log('9') // 进入微任务队列
 }).then(
-  console.log('2') // 立即执行
+  console.log('2') // 3 立即执行
 )
 requestAnimationFrame(() =>{
   console.log('7')
@@ -94,4 +94,5 @@ requestAnimationFrame(() =>{
     console.log('8')
   })
 })
-console.log('10')
+console.log('10') // 4
+// 1 5 2 10 3 6 4 9 7 8
