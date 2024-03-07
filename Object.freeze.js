@@ -15,14 +15,14 @@ player.num.a = 2 // (引用类型)对象属性依然可以修改
 console.log('player:', player) // { name: 'Curry', age: 34, num: { a: 2, b: { c: 2 } } }
 
 // "深冻结"函数
-var deepFreeze = function (obj) {
+const deepFreeze = function (obj) {
     // 获取定义在对象obj的所有属性名
     // Object.getOwnPropertyNames() 获取对象的所有自身属性的属性名（包括可枚举和不可枚举属性但不包括 Symbol 值作为名称的属性）组成的数组
-    var keys = Object.getOwnPropertyNames() // Object.keys(obj) 只能获取到所有的可枚举属性
+    const keys = Object.getOwnPropertyNames(obj) // Object.keys(obj) 只能获取到所有的可枚举属性
     console.log('keys:', keys)
     // 在冻结自身之前冻结属性
     keys.forEach(key => {
-      var val = obj[key]
+      let val = obj[key]
       // 如果 val 是个对象，冻结它
       if (typeof val === 'object' && val !== null) {
         deepFreeze(val) // 递归冻结所有属性

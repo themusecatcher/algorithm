@@ -12,12 +12,12 @@ function currying (fn, args) {
     console.log('arguments:', [...arguments])
     console.log('allArgs:', allArgs)
     // 如果参数个数小于fn.length，则递归调用，继续收集参数
-    if (allArgs.length < fn.length) { // fn.length：要柯里化函数的形参个数
-      // return currying.call(this, fn, allArgs) // call接收参数列表
+    if (allArgs.length < fn.length) { // fn.length：fn接收的形参个数
+      // return currying.call(this, fn, ...allArgs) // call接收参数列表
       return currying(fn, allArgs)
     }
     // 参数收集完，则执行fn
-    // return fn.call(this, allArgs) // apply接收参数数组
+    // return fn.call(this, ...allArgs) // apply接收参数数组
     return fn(...allArgs)
   }
 }

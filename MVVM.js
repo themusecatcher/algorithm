@@ -77,7 +77,6 @@ function observe(data) {
 // vue特点是不能新增不存在的属性 不能存在的属性没有get和set
 // 深度响应 因为每次赋予一个新对象时会给这个新对象增加数据劫持(defineProperty)
 
-
 // 接下来数据劫持和数据代理都实现了，需要编译了
 function Compile(el, vm) {
   // el 表示替换的范围

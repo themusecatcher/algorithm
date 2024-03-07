@@ -15,7 +15,7 @@
       当试图访问一个对象的某个属性时，会先在对象自身中寻找，如果对象本身没有这个属性，
       则会去它的隐式原型 __proto__（也即它的构造函数的显式原型 prototype）中寻找，
       如果没有，则会去它的原型的原型中去寻找，直到找到Object对象的原型，如果依然没有，则返回undefined
-    s.__proto__ === Student.prototype   prototype还有一个constractor属性,指向该对象的构造函数本身
+    s.__proto__ === Student.prototype   prototype还有一个constructor属性,指向该对象的构造函数本身
 */
 console.time('prototype')
 const obj = new Object() // 等价于 const obj = {}
