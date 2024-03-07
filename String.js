@@ -1,8 +1,10 @@
 // String常用操作方法
+
 // ①创建字符串
 // var stringObject = new String('hello world')
 var stringValue = 'hello world' // 其每一个实例都有一个length属性
 console.log(stringValue.length) // 11
+
 // ②字符方法
 // 用于访问字符串中单个字符的方法：
 // 1.charAt()
@@ -11,6 +13,7 @@ console.log(stringValue[1]) // 'e'，用方括号[ ]访问字符
 // 2.charCodeAt()
 // 若想得到的不是字符而是字符编码：
 console.log(stringValue.charCodeAt(1)) // '101'(即'e'的字符编码)
+
 // ③字符串操作方法
 // 1.concat()：用于将一个或多个字符串拼接起来，返回拼接后的新字符串
 var str = 'hello'
@@ -32,6 +35,7 @@ console.log(stringValue.substr(2, 5)) // 'llo w'
 console.log(stringValue.substr(2)) // 'llo world'
 // 4.repeat()：返回新的字符串，表示将字符串重复指定次数返回
 console.log('a'.repeat(3)) // 'aaa'
+
 // ④字符串位置方法
 // 1.indexOf()：从字符串的开头向后搜索子字符串，返回第一个匹配子字符串的位置，若没有找到，则返回-1。
 var stringValue = 'hello world'
@@ -42,6 +46,7 @@ console.log(stringValue.lastIndexOf('o')) // 7
 // 两个方法还可以接收可选的第二个参数：表示从字符串中的哪个位置开始搜索
 console.log(stringValue.indexOf('o', 6)) // 7
 console.log(stringValue.lastIndexOf('o', 6)) // 4
+
 // ⑤字符串迭代方法
 var str = 'hello'
 for (let i = 0; i < str.length; i++) {
@@ -53,16 +58,19 @@ for (const n of str) {
 for (const i in str) {
   console.log(i) // 字符串每项的索引值（string类型）
 }
+
 // ⑥trim()方法
 // 创建一个字符串的副本，删除前置及后缀的所有空格。
 var stringValue = '   hello world   '
 console.log(stringValue.trim()) // 'hello world'
+
 // ⑦includes()方法
 // 方法用于判断一个字符串是否包含在另一个字符串中，根据情况返回 true 或 false
 var stringValue = 'hello world'
 console.log(stringValue.includes('e')) // true
 console.log(stringValue.includes('ello')) // true
 console.log(stringValue.includes('eo')) // false
+
 // ⑧startsWith()方法
 // 方法用来判断当前字符串是否以另外一个给定的子字符串开头，并根据判断结果返回 true 或 false
 var stringValue = 'hello world'
@@ -75,6 +83,7 @@ console.log(stringValue.toUpperCase()) // 'HELLO WORLD'
 console.log(stringValue.toLocaleLowerCase()) // 'hello world'
 console.log(stringValue.toLowerCase()) // 'hello world'
 // Locale：是针对特定地区的实现，若不知道自己的代码在哪种语言环境中运行，还是使用针对地区的方法更稳妥一些。
+
 // ⑨字符串模式匹配方法
 // 1.match()：只接收一个参数，正则表达式或者RegExp对象，结果会返回一个数组。
 // 方法的行为在很大程度上有赖于 regexp 是否具有标志 g。
@@ -86,10 +95,11 @@ console.log(str.match(/k/gi)) // null
 // 2.search()：只接收一个参数，用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。
 // 结果返回字符串中第一个匹配项的索引，若没有匹配项，则返回-1。
 var stringValue = 'hello world'
-console.log(stringValue.search('world')) // 6
+console.log(stringValue.search('world')) // 6 使用字符串作为参数时，字符串参数会转换为正则表达式
 console.log(stringValue.search(/WORLD/)) // -1
 console.log(stringValue.search(/WORLD/i)) // 6
-// 3.replace()：替换子字符串的方法，接收两个参数：第一个参数是一个RegExp对象或者一个字符串(不会被转换成正则表达式)，第二个参数是一个字符串或者一个函数。
+// 3.replace()：替换子字符串的方法
+// 接收两个参数：第一个参数是一个RegExp对象或者一个字符串(不会被转换成正则表达式)，第二个参数是一个字符串或者一个函数。
 var text = 'cat,bat,sat,fat'
 var result = text.replace('at', 'ond')
 console.log(result) // 'cond,bat,sat,fat'
@@ -100,6 +110,8 @@ console.log(result) // 'cond,bond,sond,fond'
 var colorText = 'red,blue,green,yellow'
 var colors1 = colorText.split(',') // ['red', 'blue', 'green', 'yellow']
 var colors2 = colorText.split(',', 2) // ['red', 'blue']
+var colors3 = colors1.join(',') // 'red,blue,green,yellow'
+
 // ⑩localeCompare()方法
 var stringValue = 'yellow'
 // 具体返回的正数和负数未必是1和-1，需看实现
