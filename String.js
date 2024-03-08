@@ -121,4 +121,3 @@ console.log(stringValue.localeCompare('zoo')) // -1
 // ⑪fromCharCode()方法
 // String构造函数本身还有一个静态方法：fromCharCode()，接收一个或多个字符编码，然后将它们转换成一个字符串
 console.log(String.fromCharCode(104,101,108,108,111)) // 'hello'
-
