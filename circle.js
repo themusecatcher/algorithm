@@ -6,7 +6,7 @@
   for...of  26.686ms     No.5
   forEach  7.331ms     No.4
   while  2.767ms     No.2
-  d0...while  2.453ms     No.1
+  do...while  2.453ms     No.1
 */
 const arr = new Array(1000000).fill(1)
 // console.log('arr:', arr)
