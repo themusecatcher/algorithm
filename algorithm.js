@@ -109,40 +109,35 @@ console.log('findBoolean:', findBoolean('abba', 'b a a b'))
   Input: { val: 1, next: { val: 2, next: { val: 3, next: { val: 4, next: { val: 5, next: null } } } } }  n = 2
   Output: { val: 1, next: { val: 2, next: { val: 3, next: { val: 5, next: null } } } }
 */
-var dealLink = function (target, n) {
-    var res = {}
-    var ruler = []
-    function findVal (res, cur) {
-      if (cur) {
-        if (ruler.length === n) {
-          ruler.push(cur.val)
-          res.val = ruler.shift()
-          res.next = {}
-          if (cur.next) {
-            return findVal(res.next, cur.next)
-          } else {
-            ruler.shift()
-            return findVal(res.next, null)
+var removeNthFromEnd = function(head, n) {
+  let cur = head
+  let first = head
+  let i = 1
+  if (n === 1) {
+      while (cur.next) {
+          cur = cur.next
+          if (!cur.next) {
+              first.next = null
+              return head
           }
-        }
-        ruler.push(cur.val)
-        return findVal(res, cur.next)
-      } else {
-        if (ruler.length > 1) {
-          res.val = ruler.shift()
-          res.next = {}
-          return findVal(res.next, null)
-        } else {
-          res.val = ruler.shift()
-          res.next = null
-          return true
-        }
+          first = first.next
       }
-    }
-    findVal(res, target)
-    return res
+      return null
+  } else { // 非1的情况
+      while (i < n) { // 记录一个头部为head，长度为n的链表
+          cur = cur.next
+          i++
+      }
+      while (cur.next) { // cur在循环开始前指向链表的第n个节点
+          cur = cur.next
+          first = first.next
+      }
+      first.val = first.next.val
+      first.next = first.next.next
+      return head
   }
+}
 var target = { val: 1, next: { val: 2, next: { val: 3, next: { val: 4, next: { val: 5, next: null } } } } }
-console.log(dealLink(target, 2))
+console.log(removeNthFromEnd(target, 2))
 // { val: 1, next: { val: 2, next: { val: 3, next: { val: 5, next: null } } } } 
-console.log(dealLink([1, 2, 3, 4, 5], 2))
+// console.log(removeNthFromEnd([1, 2, 3, 4, 5], 2))
