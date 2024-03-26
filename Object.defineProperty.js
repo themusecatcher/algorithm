@@ -1,10 +1,3 @@
-let player = {
-  name: 'Curry',
-  age: 34,
-  career: {
-    sports: 'basketball'
-  }
-}
 function defineProperty (obj, key, val) {
   //如果某对象的属性也是一个对象，递归进入该对象，进行监听
   if (typeof val === 'object') {
@@ -32,6 +25,14 @@ function Observer (obj) {
   Object.keys(obj).forEach(key => {
     defineProperty(obj, key, obj[key])
   })
+}
+
+let player = {
+  name: 'Curry',
+  age: 34,
+  career: {
+    sports: 'basketball'
+  }
 }
 Observer(player)
 // get

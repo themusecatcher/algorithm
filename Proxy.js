@@ -2,89 +2,67 @@
   Vue 3 的响应式系统是基于 ES6 的 `Proxy` 特性构建的。
   下面是一个简化版的 Vue 3 `Proxy` 响应式实现，它展示了如何使用 `Proxy` 来创建响应式对象，并在属性被访问或修改时触发更新。
 */
-
-function isObject(value) {
-  return value !== null && typeof value === 'object' && !Array.isArray(value);
+// 检查一个值是否为对象类型
+function isObject (value) {
+  return value !== null && typeof value === 'object'
 }
-
-function createProxy(target, key, proxyHandler) {
-  if (isObject(target[key])) {
-    return createProxy(target[key], key, proxyHandler);
-  }
-
-  const proxy = new Proxy(target, proxyHandler);
-  return proxy;
-}
-
-function createReactiveObject(data, proxyHandler) {
-  const observed = {};
+function createReactiveObject (obj) {
   const handler = {
-    get(target, key, receiver) {
-      if (key in target) {
-        const value = target[key];
-        return createProxy(value, key, proxyHandler);
-      } else {
-        return Reflect.get(target, key, receiver);
-      }
+    get (target, key, receiver) {
+      console.log(`get target['${key}'] value`)
+      const res = Reflect.get(target, key, receiver)
+      return res
     },
-    set(target, key, value, receiver) {
+    set (target, key, value, receiver) {
+      console.log(`target['${key}'] changed to '${value}'`)
       if (key in target && target[key] === value) {
-        return true;
+        return true
       }
-      const oldValue = target[key];
-      target[key] = value;
-      proxyHandler.set(target, key, value, oldValue);
-      return true;
+      Reflect.set(target, key, value, receiver)
+      return true
     },
-    deleteProperty(target, key) {
-      if (key in target) {
-        const oldValue = target[key];
-        delete target[key];
-        proxyHandler.delete(target, key, oldValue);
-        return true;
-      }
-      return Reflect.deleteProperty(target, key);
-    }
-  };
-
-  for (const key in data) {
-    if (isObject(data[key])) {
-      observed[key] = createReactiveObject(data[key], proxyHandler);
-    } else {
-      observed[key] = data[key];
+    deleteProperty (target, key) {
+      console.log(`target['${key}'] has been deleted`)
+      const res = Reflect.deleteProperty(target, key)
+      return res
     }
   }
-
-  return createProxy(observed, null, handler);
+  const observed = {}
+  for (const key in obj) {
+    if (isObject(obj[key])) {
+      observed[key] = createReactiveObject(obj[key])
+    } else {
+      observed[key] = obj[key]
+    }
+  }
+  const proxy = new Proxy(observed, handler)
+  return proxy
 }
 
-// 使用示例
-const data = {
-  name: 'Alice',
-  age: 30,
-  details: {
-    address: 'Wonderland'
+const player = {
+  name: 'Curry',
+  age: 34,
+  career: {
+    sports: 'basketball'
   }
-};
+}
+const reactiveData = createReactiveObject(player)
 
-const reactiveData = createReactiveObject(data, {
-  set(target, key, value, oldValue) {
-    console.log(`'${key}' changed from '${oldValue}' to '${value}'`);
-  },
-  delete(target, key, oldValue) {
-    console.log(`'${key}' has been deleted`);
-  }
-});
+console.log('reactiveData:', reactiveData) // { name: 'Curry', age: 34, career: { sports: 'basketball' } }
 
-// 访问响应式数据
-console.log(reactiveData.name); // 输出: 'Alice'
+// 访问响应式数据name
+console.log('name:', reactiveData.name) // curry
 
 // 修改响应式数据
-reactiveData.name = 'Bob'; // 输出: "'name' changed from 'Alice' to 'Bob'"
+reactiveData.name = 'Stephen' // 输出: "'name' changed to 'Stephen'"
+console.log('reactiveData:', reactiveData)
+
+reactiveData.career.sports = 'golf'
+console.log('reactiveData:', reactiveData)
 
 // 删除响应式数据
-delete reactiveData.details.address; // 输出: "'address' has been deleted"
-
+delete reactiveData.career.sports // 输出: "'sports' has been deleted"
+console.log('reactiveData:', reactiveData)
 /*
   在这个简化版的例子中，我们定义了一个 `createReactiveObject` 函数来递归地将普通对象转换为响应式对象。
   我们使用 `Proxy` 来拦截对对象属性的访问（`get`）和修改（`set`）操作，并在这些操作发生时执行特定的逻辑。

@@ -141,3 +141,22 @@ var target = { val: 1, next: { val: 2, next: { val: 3, next: { val: 4, next: { v
 console.log(removeNthFromEnd(target, 2))
 // { val: 1, next: { val: 2, next: { val: 3, next: { val: 5, next: null } } } } 
 // console.log(removeNthFromEnd([1, 2, 3, 4, 5], 2))
+
+// 数组去重 [1, 2, 3, 4, 5, 2, 5, 6, 8, 3, 9]
+const arr = [1, 2, 3, 4, 5, 2, 5, 6, 7, 8, 3, 9]
+console.log('使用set除重:', [...new Set(arr)])
+const res = arr.filter(item => arr.indexOf(item) === -1)
+console.log('filter去重:', res)
+function removingDuplicate (arr) {
+  const len = arr.length
+  let i = 0
+  const res = []
+  while (i < len) {
+    if (!res.includes(arr[i])) {
+      res.push(arr[i])
+    }
+    i++
+  }
+  return res
+}
+console.log('removingDuplicate:', removingDuplicate(arr))
