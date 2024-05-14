@@ -1,12 +1,12 @@
 // 将一个整数插入到已排序的链表中，不破坏原有的排序
 
-function sortList (head, node) {
+function insertList (head, node) {
   node.next = head
   return node
 }
 const head = { val: 2, next: null }
 const node = { val: 1, next: null }
-console.log('sortList', sortList(head, node))
+console.log('insertList', insertList(head, node))
 
 // 重排链表为：L0 → Ln → L1 → Ln-1 → L2 → Ln-2 → …
 /**
@@ -43,7 +43,7 @@ var reorderList = function(head) {
   }
   function reverseList (head) { // 翻转链表
     let ans = null
-    while (head) {
+    while (head !== null) {
       const next = head.next
       head.next = ans
       ans = head
@@ -55,7 +55,7 @@ var reorderList = function(head) {
   let reverseHead = reverseList(middleHead) // 翻转链表
   const res = new ListNode()
   let cur = res
-  while (reverseHead) {
+  while (reverseHead !== null) {
     const next = head.next
     head.next = reverseHead
     cur.next = head
