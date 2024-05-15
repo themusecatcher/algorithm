@@ -38,38 +38,43 @@ const data = [
         parent_id: '685a99b5-f8dd-427f-a6df-e43766358e68'
       }
     ]
-var treeNode = function (data) {
-      if (data.length < 2) return data
-      function findParent (parent, child, childIndex) { // child找对应的父级
-        const len = parent.length
-        for (let i = 0; i < len; i++) {
-          if (parent[i].id === child.parent_id) { // 加入children数组中
-            if (parent[i].children) {
-              parent[i].children.push(child)
-            } else {
-              parent[i].children = [child]
-            }
-            children.splice(childIndex, 1)
-            return true
-          }
-          if (parent[i].children) { // 如果存在children数组，递归找父级
-            return findParent(parent[i].children, child, childIndex)
-          }
-        }
-        return false
-      }
-      var res = data.filter(item => !item.parent_id) // 找到所有的顶级
-      var children = data.filter(item => item.parent_id) // 得到所有的非顶级
-      var n = 0
-      while (children.length) { // 直到所有child都找到对应的父级
-        if (findParent(res, children[n], n)) {
-          n = 0
+function treeNode (data) {
+  function findParent (res, child, childIndex) { // child找对应的父级
+    let len = res.length, i = 0
+    while (i < len) {
+      if (res[i].id === child.parent_id) { // 加入children数组中
+        if (res[i].children) {
+          res[i].children.push(child)
         } else {
-          n++
+          res[i].children = [child]
+        }
+        children.splice(childIndex, 1)
+        return true
+      }
+      if (res[i].children) { // 如果存在children数组，递归找父级
+        if (findParent(res[i].children, child, childIndex)) { // 只有成功找到才return
+          return true
         }
       }
-      return res
+      i++
     }
+    return false
+  }
+  if (data.length < 2) {
+    return data
+  }
+  let res = data.filter(item => !item.parent_id) // 找到所有的顶级
+  let children = data.filter(item => item.parent_id) // 得到所有的非顶级
+  let i = 0
+  while (children.length) { // 直到所有child都找到对应的父级
+    if (findParent(res, children[i], i)) {
+      i = 0
+    } else {
+      i++
+    }
+  }
+  return res
+}
 console.log('treeNode:', treeNode(data))
 /*
   2.给定一个匹配格式，给定一段由空格拼接的字符串，判断 s 是否符合 pattern 的格式
@@ -109,34 +114,34 @@ console.log('findBoolean:', findBoolean('abba', 'b a a b'))
   Input: { val: 1, next: { val: 2, next: { val: 3, next: { val: 4, next: { val: 5, next: null } } } } }  n = 2
   Output: { val: 1, next: { val: 2, next: { val: 3, next: { val: 5, next: null } } } }
 */
-var removeNthFromEnd = function(head, n) {
-  let cur = head
-  let first = head
-  let i = 1
-  if (n === 1) {
-      while (cur.next) {
-          cur = cur.next
-          if (!cur.next) {
-              first.next = null
-              return head
-          }
-          first = first.next
-      }
-      return null
-  } else { // 非1的情况
-      while (i < n) { // 记录一个头部为head，长度为n的链表
-          cur = cur.next
-          i++
-      }
-      while (cur.next) { // cur在循环开始前指向链表的第n个节点
-          cur = cur.next
-          first = first.next
-      }
-      first.val = first.next.val
-      first.next = first.next.next
-      return head
-  }
+/**
+ * @param {ListNode} head
+ * @return {void} Do not return anything, modify head in-place instead.
+ */
+function ListNode (val, next) {
+  this.val = (val===undefined ? 0 : val)
+  this.next = (next===undefined ? null : next)
 }
+var removeNthFromEnd = function(head, n) {
+  let slow = new ListNode()
+  slow.next = head
+  let fast = head
+  let i = 0
+  while (i < n) {
+    fast = fast.next
+    i++
+  }
+  if (fast === null) { // 只需删除头节点
+    return head.next
+  }
+  while (fast !== null) {
+    slow = slow.next
+    fast = fast.next
+  }
+  // 删除 slow.next 节点
+  slow.next = slow.next.next
+  return head
+};
 var target = { val: 1, next: { val: 2, next: { val: 3, next: { val: 4, next: { val: 5, next: null } } } } }
 console.log(removeNthFromEnd(target, 2))
 // { val: 1, next: { val: 2, next: { val: 3, next: { val: 5, next: null } } } } 
