@@ -86,15 +86,15 @@ console.log('treeNode:', treeNode(data))
 */
 var findBoolean = function (pattern, s) {
     if (s === '' || pattern === '') return false
-    var sArr = s.split(' ')
+    const sArr = s.split(' ')
     const len = sArr.length
     if (pattern.length !== len) return false
-    var res = []
-    for (let n = 0; n < len; n++) {
-      if (!res[n]) { // 该索引位置（即n）没有被匹配替换过
-        for(let m = n; m < len; m++) {
-          if (!res[m] && sArr[m] === sArr[n]) { // 该索引位置没有被替换过，且
-            res[m] = pattern[n]
+    const res = []
+    for (let i = 0; i < len; i++) {
+      if (!res[i]) { // 该索引位置（即i）没有被匹配替换过
+        for(let j = i; j < len; j++) {
+          if (!res[j] && sArr[j] === sArr[i]) { // 该索引位置没有被替换过，且
+            res[j] = pattern[i]
           }
         }
       }
@@ -119,8 +119,8 @@ console.log('findBoolean:', findBoolean('abba', 'b a a b'))
  * @return {void} Do not return anything, modify head in-place instead.
  */
 function ListNode (val, next) {
-  this.val = (val===undefined ? 0 : val)
-  this.next = (next===undefined ? null : next)
+  this.val = (val === undefined ? 0 : val)
+  this.next = (next === undefined ? null : next)
 }
 var removeNthFromEnd = function(head, n) {
   let slow = new ListNode()
