@@ -3,16 +3,19 @@
 # 确保脚本抛出遇到的错误
 set -e
 
-# 提交修改到github
+# 提交修改到 github
 
-commitDescInfo=$1
+commitDesc=$1
 
 git add .
 
-if [ -z ${commitDescInfo} ]; then
-  git cm -m 'update'
+if [ -z "$commitDesc" ]; then
+  git commit -m 'update'
 else
-  git cm -m ${commitDescInfo}
+  git commit -m "$commitDesc"
 fi
 
 git push
+
+echo ⏰ "$(date '+%Y-%m-%d %H:%M:%S')"
+

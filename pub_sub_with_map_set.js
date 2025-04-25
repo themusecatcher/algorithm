@@ -1,5 +1,5 @@
 // 发布-订阅模式 使用 Map 和 Set 实现
-class PubSub {
+export class PubSub {
   constructor() {
     this.eventsMap = new Map() // 存储事件及其回调列表
   }

@@ -1,5 +1,5 @@
 // 发布-订阅模式
-class PubSub {
+export class PubSub {
   constructor() {
     this.events = {} // 存储事件及其回调列表
   }
