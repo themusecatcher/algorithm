@@ -34,7 +34,7 @@ class PubSub {
   once(event, callback) {
     const onceWrapper = (...args) => {
       callback(...args)
-      this.off(event, onceWrapper)
+      this.off(event, onceWrapper) // 自动取消订阅
     }
     this.on(event, onceWrapper)
   }
