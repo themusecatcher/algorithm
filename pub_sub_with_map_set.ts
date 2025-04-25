@@ -1,5 +1,6 @@
 // 发布-订阅模式 使用 Map 和 Set 实现
 export class PubSub {
+  private eventsMap: Map<string, Set<Function>>
   constructor() {
     this.eventsMap = new Map() // 存储事件及其回调列表
   }
@@ -8,21 +9,21 @@ export class PubSub {
    * @param {string} event - 事件名称
    * @param {Function} callback - 回调函数
    */
-  on(event, callback) {
+  on(event: string, callback: Function): void {
     if (typeof callback !== 'function') {
       throw new TypeError('Callback must be a function')
     }
     if (!this.eventsMap.has(event)) {
       this.eventsMap.set(event, new Set())
     }
-    this.eventsMap.get(event).add(callback)
+    this.eventsMap.get(event)!.add(callback)
   }
   /**
    * 发布事件
    * @param {string} event - 事件名称
    * @param {...*} args - 传递给回调函数的参数
    */
-  emit(event, ...args) { // ...args：剩余参数语法，用于将所有接收到的参数收集到 args 数组中
+  emit(event: string, ...args: any[]): void { // ...args：剩余参数语法，用于将所有接收到的参数收集到 args 数组中
     const callbacksSet = this.eventsMap.get(event)
     if (callbacksSet) {
       for (const cb of callbacksSet) { // 或者 forEach
@@ -39,7 +40,7 @@ export class PubSub {
    * @param {string} event - 事件名称
    * @param {Function} callback - 要取消的回调函数
    */
-  off(event, callback) {
+  off(event: string, callback: Function): void {
     if (typeof callback !== 'function') {
       throw new TypeError('Callback must be a function')
     }
@@ -57,11 +58,11 @@ export class PubSub {
    * @param {string} event - 事件名称
    * @param {Function} callback - 回调函数
    */
-  once(event, callback) {
+  once(event: string, callback: Function): void {
     if (typeof callback !== 'function') {
       throw new TypeError('Callback must be a function')
     }
-    const onceWrapper = (...args) => {
+    const onceWrapper = (...args: any[]) => {
       try {
         callback(...args)
       } finally {
