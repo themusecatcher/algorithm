@@ -1,5 +1,5 @@
 // 发布-订阅模式 使用 Map 和 Set 实现
-export class PubSub {
+export class EventBus {
   private eventsMap: Map<string, Set<Function>>
   constructor() {
     this.eventsMap = new Map() // 存储事件及其回调列表
@@ -74,23 +74,23 @@ export class PubSub {
 }
 
 // 使用示例
-const pubSub = new PubSub()
+const eventBus = new EventBus()
 
 // 订阅 message 事件
 const logMessage = (msg) => console.log('Message:', msg)
-pubSub.on('message', logMessage)
+eventBus.on('message', logMessage)
 
 // 发布 message 事件
-pubSub.emit('message', 'Hello World') // 输出: Message: Hello World
+eventBus.emit('message', 'Hello World') // 输出: Message: Hello World
 
 // 取消订阅 message 事件
-pubSub.off('message', logMessage)
+eventBus.off('message', logMessage)
 // 再次发布 message 事件，无输出
-pubSub.emit('message', 'This will not be logged')
+eventBus.emit('message', 'This will not be logged')
 
 // 一次性订阅 greet 事件
-pubSub.once('greet', (name) => console.log(`Hello, ${name}!`))
+eventBus.once('greet', (name) => console.log(`Hello, ${name}!`))
 
 // 发布一次性订阅 greet 事件
-pubSub.emit('greet', 'Alice') // 输出: Hello, Alice!
-pubSub.emit('greet', 'Bob')   // 无输出
+eventBus.emit('greet', 'Alice') // 输出: Hello, Alice!
+eventBus.emit('greet', 'Bob')   // 无输出
