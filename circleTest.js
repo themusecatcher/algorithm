@@ -2,8 +2,8 @@
   执行1百万个1相加的操作
   五种循环执行效率比较：
   for...  3.572ms     No.3
-  for...in  64.663ms     No.6
-  for...of  26.686ms     No.5
+  for...in  64.663ms     No.6 遍历对象的可枚举属性（包括原型链）（需检查原型链，所以速度较慢）
+  for...of  26.686ms     No.5 遍历可迭代对象的元素（数组、字符串、Map、Set 等实现了 Symbol.iterator 的对象）不遍历原型链，所以速度更快相比 for...in
   forEach  7.331ms     No.4
   while  2.767ms     No.2
   do...while  2.453ms     No.1
