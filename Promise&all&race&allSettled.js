@@ -5,8 +5,8 @@
   ②第二个参数是 Promise 执行失败时的回调，两个函数只会有一个被调用。
     • 如果执行了 resolve 函数，则会回调 promise 对象的 .then 函数
     • 如果执行了 reject 函数，且 then 函数没有传入第二个参数，则会回调 promise 对象的 .catch 函数
-    • 如果then函数传入了第二个参数（即reject时的回调），则promise对象的.catch函数将无法捕获reject
-  catch方法的返回值也是promise
+    • 如果then函数传入了第二个参数（即 reject 时的回调），则 promise 对象的 .catch 函数将无法捕获 reject
+  catch 方法的返回值也是 promise
   无论 promise 状态是 fulfilled 还是 rejected 都会执行一次 finally 方法
 */
 function request (url) {
@@ -78,7 +78,7 @@ var pAll = Promise.all([]).then(res => {
   console.log('all-err:', err) // 有 reject 就输出第一个 reject 的结果 Error: fail
 })
 
-// 手写实现Promise.all()函数
+// 手写实现 Promise.all() 函数
 const PromiseAll = function (promises) {
   return new Promise((resolve, reject) => {
     // 判断是否具有 iterator 接口：return typeof promises[Symbol.iterator] === 'function'
@@ -116,9 +116,9 @@ pAll = PromiseAll([]).then(res => {
 
 /*
   Promise.race 方法同样是将多个 Promise 实例，包装成一个新的 Promise 实例。
-  只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。
-  那个率先改变的Promise实例的返回值，就传递给p的返回值。
-  输出第一个获取到的结果，无论是resolve还是reject
+  只要 p1、p2、p3 之中有一个实例率先改变状态，p 的状态就跟着改变。
+  那个率先改变的 Promise 实例的返回值，就传递给p的返回值。
+  输出第一个获取到的结果，无论是 resolve 还是 reject
 */
 var pRace = Promise.race([promise1, promise2, promise3]).then(res => {
   console.log('race-res:', res)
