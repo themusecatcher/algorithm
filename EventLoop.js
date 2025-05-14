@@ -84,7 +84,7 @@ async function too () {
 }
 too()
 // 所有 then() 回调都会直接执行，看参数类型决定是加入微任务队列还是立即执行
-// then() 方法的返回值是 promise，普通数值 1，等价于 return Promise.resolve(1)；如果没有返回值则相当于返回 return Promise.resolve(undefined)
+// then() 方法的返回值始终是 promise，当返回普通数值 1 时，等价于 return Promise.resolve(1)；如果没有返回值，则相当于返回 return Promise.resolve(undefined)
 Promise.resolve('4').then(res => {
   console.log(res) // v3
 }).then(() => { // 回调函数微任务，进入微任务对列，等待执行
