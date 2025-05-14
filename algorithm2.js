@@ -4,6 +4,29 @@
   uncompress('3(ab2(c))') // 'abccabccabcc'
 */
 
+function uncompress(str) {
+  let repeat = 0
+  let repeatStack = []
+  let res = ''
+  let resStack = []
+  for (const char of str) {
+    if (!isNaN(char)) { // 数字时，进行累加计算
+      repeat = repeat * 10 + Number(char)
+    } else if (char === '(') {
+      repeatStack.push(repeat)
+      repeat = 0
+      resStack.push(res)
+      res = ''
+    } else if (char === ')') {
+      res = resStack.pop() + res.repeat(repeatStack.pop())
+    } else {
+      res += char
+    }
+  }
+  return res
+}
+console.log(uncompress('3(ab)')) // 'ababab'
+console.log(uncompress('3(ab2(c))')) // 'abccabccabcc'
 /*
   数组拍平
   arr: ['hello', 'world', 1, [2], [3, [4]], [[[5], 6]]]
