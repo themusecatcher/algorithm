@@ -75,3 +75,36 @@ function LIS(nums) {
   return res[res.length - 1]
 }
 console.log(LIS([4, 5, 1, 2, 7, 3, 6, 9])) // [1, 2, 3, 6, 9]
+
+/*
+  给你一个二叉树的根节点 root ，判断其是否是一个有效的二叉搜索树。
+  有效 二叉搜索树定义如下：
+  1.节点的左子树只包含 小于 当前节点的数。
+  2.节点的右子树只包含 大于 当前节点的数。
+  3.所有左子树和右子树自身必须也是二叉搜索树。
+*/
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isValidBST = function(root) {
+  function recurse (node, lower, upper) {
+      if (node === null) return true
+      const val = node.val
+      if (lower !== null && lower >= val) return false
+      if (upper !== null && upper <= val) return false
+      if (!recurse(node.left, lower, val)) return false // 递归判断左子树
+      if (!recurse(node.right, val, upper)) return false // 递归判断右子树
+      return true
+  }
+  return recurse(root, null, null) //  或 recurse(root, -Infinity, Infinity)
+}
