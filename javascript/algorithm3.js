@@ -108,3 +108,6 @@ var isValidBST = function(root) {
   }
   return recurse(root, null, null) //  或 recurse(root, -Infinity, Infinity)
 }
+/*
+  数组去重
+*/
