@@ -47,3 +47,31 @@ const obj = {
 	c: 3
 }
 console.log(transform(obj))
+
+/*
+  最长递增子系列
+  输入：[1, 3, 5, 2, 4, 6, 7]
+  输出：[1, 3, 5, 6, 7]
+*/
+function LIS(nums) {
+  if (nums.length === 0) {
+    return []
+  }
+  const res = [[nums[0]]]
+  function updateRes (n) {
+    for (let i = res.length - 1; i >= 0; i--) {
+      const line = res[i]
+      const last = line[line.length - 1]
+      if (n > last) {
+        res[i + 1] = [...line, n]
+        return
+      }
+    }
+    res[0] = [n]
+  }
+  for (let i = 1; i < nums.length; i++) {
+    updateRes(nums[i])
+  }
+  return res[res.length - 1]
+}
+console.log(LIS([4, 5, 1, 2, 7, 3, 6, 9])) // [1, 2, 3, 6, 9]
