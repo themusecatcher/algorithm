@@ -111,3 +111,55 @@ var isValidBST = function(root) {
 /*
   数组去重
 */
+const arr = [3, 1, 2, 2, 3, 3, 'a', 'a', NaN, NaN]
+const uniqueArr1 = [...new Set(arr)] // ES6+
+/*
+  时间复杂度 O(n)：高效，适合大数据量。
+  无法处理对象：对象引用不同视为不同元素。
+  自动处理 NaN：Set 能正确识别 NaN 去重。
+*/
+
+console.log(uniqueArr1) // [3, 1, 2, 'a', NaN]
+
+const uniqueArr2 = arr.filter((item, index) => arr.indexOf(item) === index)
+/*
+  时间复杂度 O(n²)：性能较差，适用于小数据量。
+  不处理 NaN：indexOf(NaN) 始终返回 -1，无法去重 NaN。
+*/
+console.log(uniqueArr2) // [ 3, 1, 2, 'a' ]
+
+// 一个 非严格递增排列 的数组 nums，原地 删除重复出现的元素，使每个元素 只出现一次，返回删除后数组
+const nums1 = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
+/*
+  通过 双指针法（快慢指针） 实现原地删除非严格递增数组中重复元素的需求，满足时间复杂度 O(n) 和空间复杂度 O(1)
+*/
+function removeDuplicates(nums) {
+  if (nums.length <= 1) return nums.length
+  let slow = 1
+  for (let fast = 1; fast < nums.length; fast++) {
+    if (nums[fast] !== nums[slow - 1]) {
+      nums[slow] = nums[fast]
+      slow++
+    }
+  }
+  // return slow
+  return nums.slice(0, slow)
+}
+console.log(removeDuplicates(nums1)) // 5: [ 0, 1, 2, 3, 4 ]
+
+// 保留最多 k 次重复 (去重即 k = 1)
+const nums2 = [0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 5]
+function removeDuplicatesK(nums, k) {
+  if (nums.length <= k) return nums.length
+  let slow = k
+  for (let fast = k; fast < nums.length; fast++) {
+    if (nums[fast] !== nums[slow - k]) {
+      nums[slow] = nums[fast]
+      slow++
+    }
+  }
+  // return slow
+  return nums.slice(0, slow)
+}
+console.log(removeDuplicatesK(nums2, 1)) // 6: [ 0, 1, 2, 3, 4, 5 ]
+// console.log(removeDuplicatesK(nums2, 2)) // 10: [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 5 ]
