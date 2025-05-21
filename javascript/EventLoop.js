@@ -77,6 +77,20 @@ new Promise(function (resolve) {
 */
 
 console.log('1') // 1
+/*
+  async/await 是 Promise 的语法糖，如下：
+  // 等价写法 1：async/await
+  async function foo() {
+    await somePromise
+    console.log("A")
+  }
+  // 等价写法 2：Promise.then
+  function foo() {
+    return somePromise.then(() => {
+      console.log("A")
+    })
+  }
+*/
 async function foo () {
   // await 后的表达式会被转换为一个 Promise（如果不是 Promise，会调用 Promise.resolve() 包装）。
   await bar()
