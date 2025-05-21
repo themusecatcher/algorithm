@@ -20,7 +20,7 @@ function request (url) {
 }
 // resolve
 request('https').then(res => {
-  console.log('https-res:', res) // 捕获resolve
+  console.log('https-res:', res) // 捕获 resolve
 }).catch(err => {
   console.log('https-err:', err)
 }).finally(() => {
@@ -29,14 +29,14 @@ request('https').then(res => {
 // reject 方式一
 request('http').then(res => {
   console.log('http1-res:', res)
-}, err => { console.log('http1-err1', err) } // 捕获reject
+}, err => { console.log('http1-err1', err) } // 捕获 reject
 ).catch(err => {
   console.log('http1-err2:', err) // 不执行
 })
 // reject 方式二
 request('http').then(res => {
   console.log('http2-res:', res)
-}).catch(err => { // then函数没有传入第二个参数时，捕获reject
+}).catch(err => { // then 函数没有传入第二个参数时，捕获 reject
   console.log('http2-err:', err)
 })
 
