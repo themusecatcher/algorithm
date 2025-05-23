@@ -121,8 +121,8 @@ const p1 = new Promise((resolve, reject) => {
   reject(2)
 })
 console.log('p1', p1)
-// const p2 = new Promise(() => { throw 123 })
-// console.log('p2', p2)
+const p2 = new Promise(() => { throw 123 })
+console.log('p2', p2)
 const p3 = new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve('setTimeout') // 无法捕获

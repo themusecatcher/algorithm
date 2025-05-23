@@ -111,7 +111,7 @@ const p3 = 'hello'
 pAll = PromiseAll([]).then(res => {
   console.log('pAll-res:', res) // [3, true, 'hello']
 }).catch(err => {
-  console.log('pAll-err:', err) // 有reject就输出第一个reject的结果 Error: fail
+  console.log('pAll-err:', err) // 有 reject 就输出第一个 reject 的结果 Error: fail
 })
 
 /*
