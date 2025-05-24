@@ -1,3 +1,3 @@
 # algorithm
 
-### 算法练习比较
+### JavaScript & TypeScript 练习学习笔记
