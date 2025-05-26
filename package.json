@@ -2,7 +2,7 @@
   "name": "algorithm",
   "version": "1.0.0",
   "type": "module",
-  "description": "算法练习比较",
+  "description": "JavaScript & TypeScript 练习学习笔记",
   "scripts": {
     "push": "sh push.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
