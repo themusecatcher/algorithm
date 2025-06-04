@@ -1,7 +1,7 @@
 /*
   1.执行同步代码：所有同步任务按顺序执行，形成调用栈（Call Stack）。
   2.处理异步任务：
-    宏任务：如 setTimeout、setInterval、I/O 操作、XHR 回调、DOM 事件回调（click、scroll）、setImmediate、requestAnimationFrame等，会被推入宏任务队列。
+    宏任务：如 setTimeout、setInterval、I/O 操作、XHR 回调、DOM 事件回调（click、scroll 等交互事件）、setImmediate、requestAnimationFrame等，会被推入宏任务队列。
     微任务：如 Promise.then、catch、finally、async/await、Fetch 回调、process.nextTick、MutationObserver 等，会被推入微任务队列。
   3.调用栈清空后：
     优先执行所有微任务：清空微任务队列中的任务。
@@ -91,6 +91,7 @@ console.log('1') // 1
     })
   }
 */
+// await 的作用即是等待之后的 Promise，其一旦完成，就将 await 下一行后续代码放入微队列；若 await 后续没有代码，则将 async 整个函数返回的 Promise 完成这件事放入微队列
 async function foo () {
   // await 后的表达式会被转换为一个 Promise（如果不是 Promise，会调用 Promise.resolve() 包装）。
   await bar()
