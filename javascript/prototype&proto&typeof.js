@@ -59,10 +59,10 @@
   Person.prototype === player.__proto__ // true
   Person.prototype.constructor === Person
   new 关键字会进行如下操作：
-	① 创建一个空的简单JavaScript对象（即{}）
-	② 为步骤1新创建的对象添加属性__proto__，将该属性链接至构造函数的原型对象
-	③ 将步骤1新创建的对象作为this的上下文（即将this绑定到新创建的对象）
-  ④ 如果该函数没有返回对象，则返回this（即返回新创建的对象）
+	① 创建一个空的简单 JavaScript 对象（即{}），即新的实例对象
+	② 为步骤1新创建的对象添加属性 __proto__ ，将该属性链接至构造函数的原型对象
+	③ 执行构造函数，同时将步骤1新创建的对象绑定为this的上下文（即将this绑定到新创建的对象）
+  ④ 如果构造函数返回非原始值，该返回值成为整个 new 表达式的结果。如果未返回任何值或返回原始值，则返回该实例对象。
 */
 function Person1(name) {
   this.name = name
@@ -79,7 +79,7 @@ function Person3(name) {
 const person1 = new Person1('curry')
 const person2 = new Person2('curry')
 const person3 = new Person3('curry')
-console.log('person1:', person1) // Person1 { name: 'curry' }
+console.log('person1:', person1.__proto__.__proto__) // Person1 { name: 'curry' }
 console.log('person2:', person2) // { name: 'John' }
 console.log('person3:', person3) // [String: 'hello']
 
