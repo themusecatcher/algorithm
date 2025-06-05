@@ -83,65 +83,65 @@ console.log('person1:', person1) // Person1 { name: 'curry' }
 console.log('person2:', person2) // { name: 'John' }
 console.log('person3:', person3) // [String: 'hello']
 
-// console.time('prototype')
-// const obj = new Object() // 等价于 const obj = {}
-// const arr = new Array() // 等价于 const arr = []
-// const fn = function () {}
-// const date = new Date()
-// const reg = new RegExp('at', 'g')
-// const err = new Error()
-// const newTru = new Boolean(true) // typeof：oject
-// const newNum = new Number(3) // typeof：object
-// const newStr = new String('world') // typeof：object
-// const tru = true // typeof：boolean
-// const num = 5 // typeof：number
-// const str = 'world' // typeof：string
-// console.log('typeof obj:', typeof obj) // object
-// console.log('typeof arr:', typeof arr) // object
-// console.log('typeof fn:', typeof fn) // function
-// console.log('typeof date:', typeof date) // object
-// console.log('typeof reg:', typeof reg) // object
-// console.log('typeof err:', typeof err) // object
-// console.log('typeof null:', typeof null) // object
-// console.log('typeof newTru:', typeof newTru) // object
-// console.log('typeof newNum:', typeof newNum) // object
-// console.log('typeof newStr:', typeof newStr) // object
-// console.log('typeof undefined:', typeof undefined) // undefined
-// console.log('typeof tru:', typeof tru) // boolean
-// console.log('typeof num:', typeof num) // number
-// console.log('typeof str:', typeof str) // string
-// console.log(obj.__proto__ === Object.prototype) // true
-// console.log(arr.__proto__ === Array.prototype) // true
-// console.log(fn.__proto__ === Function.prototype) // true
-// console.log(date.__proto__ === Date.prototype) // true
-// console.log(reg.__proto__ === RegExp.prototype) // true
-// console.log(tru.__proto__ === Boolean.prototype) // true
-// console.log(num.__proto__ === Number.prototype) // true
-// console.log(str.__proto__ === String.prototype) // true
-// console.log(Object.prototype.__proto__) // null
-// console.log(Array.prototype.__proto__ === Object.prototype) // true
-// console.log(Function.prototype.__proto__ === Object.prototype) // true
-// console.log(Date.prototype.__proto__ === Object.prototype) // true
-// console.log(RegExp.prototype.__proto__ === Object.prototype) // true
-// console.log(Boolean.prototype.__proto__ === Object.prototype) // true
-// console.log(Number.prototype.__proto__ === Object.prototype) // true
-// console.log(String.prototype.__proto__ === Object.prototype) // true
+console.time('prototype')
+const obj = new Object() // 等价于 const obj = {}
+const arr = new Array() // 等价于 const arr = []
+const fn = function () {}
+const date = new Date()
+const reg = new RegExp('at', 'g')
+const err = new Error()
+const newTru = new Boolean(true) // typeof：oject
+const newNum = new Number(3) // typeof：object
+const newStr = new String('world') // typeof：object
+const tru = true // typeof：boolean
+const num = 5 // typeof：number
+const str = 'world' // typeof：string
+console.log('typeof obj:', typeof obj) // object
+console.log('typeof arr:', typeof arr) // object
+console.log('typeof fn:', typeof fn) // function
+console.log('typeof date:', typeof date) // object
+console.log('typeof reg:', typeof reg) // object
+console.log('typeof err:', typeof err) // object
+console.log('typeof null:', typeof null) // object
+console.log('typeof newTru:', typeof newTru) // object
+console.log('typeof newNum:', typeof newNum) // object
+console.log('typeof newStr:', typeof newStr) // object
+console.log('typeof undefined:', typeof undefined) // undefined
+console.log('typeof tru:', typeof tru) // boolean
+console.log('typeof num:', typeof num) // number
+console.log('typeof str:', typeof str) // string
+console.log(obj.__proto__ === Object.prototype) // true
+console.log(arr.__proto__ === Array.prototype) // true
+console.log(fn.__proto__ === Function.prototype) // true
+console.log(date.__proto__ === Date.prototype) // true
+console.log(reg.__proto__ === RegExp.prototype) // true
+console.log(tru.__proto__ === Boolean.prototype) // true
+console.log(num.__proto__ === Number.prototype) // true
+console.log(str.__proto__ === String.prototype) // true
+console.log(Object.prototype.__proto__) // null
+console.log(Array.prototype.__proto__ === Object.prototype) // true
+console.log(Function.prototype.__proto__ === Object.prototype) // true
+console.log(Date.prototype.__proto__ === Object.prototype) // true
+console.log(RegExp.prototype.__proto__ === Object.prototype) // true
+console.log(Boolean.prototype.__proto__ === Object.prototype) // true
+console.log(Number.prototype.__proto__ === Object.prototype) // true
+console.log(String.prototype.__proto__ === Object.prototype) // true
 
-// console.log('Object.__proto__:', Object.__proto__)
-// console.log('Function.prototype:', Function.prototype)
-// console.log(Object.__proto__ === Function.prototype) // true
-// console.log('obj.toString():', obj.toString()) // [object Object]
+console.log('Object.__proto__:', Object.__proto__)
+console.log('Function.prototype:', Function.prototype)
+console.log(Object.__proto__ === Function.prototype) // true
+console.log('obj.toString():', obj.toString()) // [object Object]
 
-// function Player (name) {
-//   this.name = name
-//   // return this // 默认返回this对象
-// }
-// const curry = new Player('curry')
-// console.log('curry:', curry)
-// console.log('curry.__proto__:', curry.__proto__)
-// console.log(curry.__proto__ === Player.prototype) // true
-// console.log('Player.prototype:', Player.prototype)
-// console.log('Player.prototype.__proto__:', Player.prototype.__proto__)
-// console.log(Player.prototype.__proto__ === Object.prototype) // true
-// console.log(Object.prototype.__proto__) // null，Object的隐式原型__proto__指向null
-// console.timeEnd('prototype')
+function Player (name) {
+  this.name = name
+  // return this // 默认返回this对象
+}
+const curry = new Player('curry')
+console.log('curry:', curry)
+console.log('curry.__proto__:', curry.__proto__)
+console.log(curry.__proto__ === Player.prototype) // true
+console.log('Player.prototype:', Player.prototype)
+console.log('Player.prototype.__proto__:', Player.prototype.__proto__)
+console.log(Player.prototype.__proto__ === Object.prototype) // true
+console.log(Object.prototype.__proto__) // null，Object的隐式原型__proto__指向null
+console.timeEnd('prototype')
