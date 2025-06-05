@@ -4,18 +4,18 @@
   隐式原型：每个实例对象都有一个 __proto__，这个就是隐式原型
   每个实例对象的 __proto__ 都等于其构造函数的 prototype，它们都指向原型对象
   也就是 函数的是显式原型，实例对象的是隐式原型。
-	• prototype与__proto__的联系
-	  prototype与__proto__都指向原型对象，
-    任意一个函数（包括构造函数）都有一个prototype属性，指向该函数的原型对象，
-    任意一个构造函数实例化的对象，都有一个__proto__对象,它指向构造函数的原型对象.
-	• prototype与__proto__的区别
-		prototype是函数独有的，而__proto__是每个对象都会拥有的（包括函数）
-		prototype的作用是保存所有实例公共的属性和方法；
+	• prototype 与 __proto__ 的联系
+	  prototype 与 __proto__ 都指向原型对象，
+    任意一个函数（包括构造函数）都有一个 prototype 属性，指向该函数的原型对象，
+    任意一个构造函数实例化的对象，都有一个 __proto__ 对象,它指向构造函数的原型对象.
+	• prototype 与 __proto__ 的区别
+		prototype 是函数独有的，而 __proto__ 是每个对象都会拥有的（包括函数）
+		prototype 的作用是保存所有实例公共的属性和方法；
     原型链：
       当试图访问一个对象的某个属性时，会先在对象自身中寻找，如果对象本身没有这个属性，
       则会去它的隐式原型 __proto__（也即它的构造函数的显式原型 prototype）中寻找，
-      如果没有，则会去它的原型的原型中去寻找，直到找到Object对象的原型，如果依然没有，则返回undefined
-    s.__proto__ === Student.prototype   prototype还有一个constructor属性,指向该对象的构造函数本身
+      如果没有，则会去它的原型的原型中去寻找，直到找到 Object 对象的原型，如果依然没有，则返回 undefined
+    s.__proto__ === Student.prototype  prototype 还有一个 constructor 属性,指向该对象的构造函数本身
 */
 /*
   new 运算符允许开发人员创建一个用户定义的对象类型的实例或具有构造函数的内置对象的实例。
@@ -32,6 +32,25 @@
   4.如果构造函数返回非原始值，则该返回值成为整个 new 表达式的结果。否则，如果构造函数未返回任何值或返回了一个原始值，
     则返回 newInstance。（通常构造函数不返回值，但可以选择返回值，以覆盖正常的对象创建过程。）
 
+  在 JavaScript 中，非原始值（Non-primitive values）是指所有不是原始类型（primitive types）的值，
+  它们本质上是对象（Object）或派生自对象的特殊类型。
+  核心特征：
+    1.引用类型：存储的是内存地址（引用），而不是实际值
+    2.可变性：创建后内容可以被修改
+    3.按引用比较：比较的是内存地址而非内容
+
+  非原始值类型：
+  类型	示例	说明
+  对象	{ name: 'John' }	普通对象
+  数组	[1, 2, 3]	特殊类型的对象
+  函数	function() {}	可执行对象
+  日期	new Date()	日期对象
+  正则表达式	/pattern/	正则对象
+  包装对象	new String("hello")	原始值的对象包装
+  Map/Set	new Map(), new Set()	ES6 新增集合类型
+  自定义类	class MyClass {}	用户定义的对象类型
+
+
   构造函数就是一个普通的函数，创建方式和普通函数没有区别，不同的是：
 	· 构造函数习惯上首字母大写
 	· 调用方式的不同，普通函数是直接调用，而构造函数需要使用new关键字来调用。
@@ -45,65 +64,84 @@
 	③ 将步骤1新创建的对象作为this的上下文（即将this绑定到新创建的对象）
   ④ 如果该函数没有返回对象，则返回this（即返回新创建的对象）
 */
-console.time('prototype')
-const obj = new Object() // 等价于 const obj = {}
-const arr = new Array() // 等价于 const arr = []
-const fn = function () {}
-const date = new Date()
-const reg = new RegExp('at', 'g')
-const err = new Error()
-const newTru = new Boolean(true) // typeof：oject
-const newNum = new Number(3) // typeof：object
-const newStr = new String('world') // typeof：object
-const tru = true // typeof：boolean
-const num = 5 // typeof：number
-const str = 'world' // typeof：string
-console.log('typeof obj:', typeof obj) // object
-console.log('typeof arr:', typeof arr) // object
-console.log('typeof fn:', typeof fn) // function
-console.log('typeof date:', typeof date) // object
-console.log('typeof reg:', typeof reg) // object
-console.log('typeof err:', typeof err) // object
-console.log('typeof null:', typeof null) // object
-console.log('typeof newTru:', typeof newTru) // object
-console.log('typeof newNum:', typeof newNum) // object
-console.log('typeof newStr:', typeof newStr) // object
-console.log('typeof undefined:', typeof undefined) // undefined
-console.log('typeof tru:', typeof tru) // boolean
-console.log('typeof num:', typeof num) // number
-console.log('typeof str:', typeof str) // string
-console.log(obj.__proto__ === Object.prototype) // true
-console.log(arr.__proto__ === Array.prototype) // true
-console.log(fn.__proto__ === Function.prototype) // true
-console.log(date.__proto__ === Date.prototype) // true
-console.log(reg.__proto__ === RegExp.prototype) // true
-console.log(tru.__proto__ === Boolean.prototype) // true
-console.log(num.__proto__ === Number.prototype) // true
-console.log(str.__proto__ === String.prototype) // true
-console.log(Object.prototype.__proto__) // null
-console.log(Array.prototype.__proto__ === Object.prototype) // true
-console.log(Function.prototype.__proto__ === Object.prototype) // true
-console.log(Date.prototype.__proto__ === Object.prototype) // true
-console.log(RegExp.prototype.__proto__ === Object.prototype) // true
-console.log(Boolean.prototype.__proto__ === Object.prototype) // true
-console.log(Number.prototype.__proto__ === Object.prototype) // true
-console.log(String.prototype.__proto__ === Object.prototype) // true
-
-console.log('Object.__proto__:', Object.__proto__)
-console.log('Function.prototype:', Function.prototype)
-console.log(Object.__proto__ === Function.prototype) // true
-console.log('obj.toString():', obj.toString()) // [object Object]
-
-function Player (name) {
+function Person1(name) {
   this.name = name
-  // return this // 默认返回this对象
+  return null // 未返回任何值或返回了一个原始值（如 null 或 undefined），则返回创建的新实例对象
 }
-var curry = new Player('curry')
-console.log('curry:', curry)
-console.log('curry.__proto__:', curry.__proto__)
-console.log(curry.__proto__ === Player.prototype) // true
-console.log('Player.prototype:', Player.prototype)
-console.log('Player.prototype.__proto__:', Player.prototype.__proto__)
-console.log(Player.prototype.__proto__ === Object.prototype) // true
-console.log(Object.prototype.__proto__) // null，Object的隐式原型__proto__指向null
-console.timeEnd('prototype')
+function Person2(name) {
+  this.name = name
+  return { name: 'John' } // 返回一个对象（非原始值），则 new 表达式的结果为这个对象，而不是 this 指向的新实例
+}
+function Person3(name) {
+  this.name = name
+  return new String('hello') // 返回一个非原始值，则 new 表达式的结果为这个对象，而不是 this 指向的新实例
+}
+const person1 = new Person1('curry')
+const person2 = new Person2('curry')
+const person3 = new Person3('curry')
+console.log('person1:', person1) // Person1 { name: 'curry' }
+console.log('person2:', person2) // { name: 'John' }
+console.log('person3:', person3) // [String: 'hello']
+
+// console.time('prototype')
+// const obj = new Object() // 等价于 const obj = {}
+// const arr = new Array() // 等价于 const arr = []
+// const fn = function () {}
+// const date = new Date()
+// const reg = new RegExp('at', 'g')
+// const err = new Error()
+// const newTru = new Boolean(true) // typeof：oject
+// const newNum = new Number(3) // typeof：object
+// const newStr = new String('world') // typeof：object
+// const tru = true // typeof：boolean
+// const num = 5 // typeof：number
+// const str = 'world' // typeof：string
+// console.log('typeof obj:', typeof obj) // object
+// console.log('typeof arr:', typeof arr) // object
+// console.log('typeof fn:', typeof fn) // function
+// console.log('typeof date:', typeof date) // object
+// console.log('typeof reg:', typeof reg) // object
+// console.log('typeof err:', typeof err) // object
+// console.log('typeof null:', typeof null) // object
+// console.log('typeof newTru:', typeof newTru) // object
+// console.log('typeof newNum:', typeof newNum) // object
+// console.log('typeof newStr:', typeof newStr) // object
+// console.log('typeof undefined:', typeof undefined) // undefined
+// console.log('typeof tru:', typeof tru) // boolean
+// console.log('typeof num:', typeof num) // number
+// console.log('typeof str:', typeof str) // string
+// console.log(obj.__proto__ === Object.prototype) // true
+// console.log(arr.__proto__ === Array.prototype) // true
+// console.log(fn.__proto__ === Function.prototype) // true
+// console.log(date.__proto__ === Date.prototype) // true
+// console.log(reg.__proto__ === RegExp.prototype) // true
+// console.log(tru.__proto__ === Boolean.prototype) // true
+// console.log(num.__proto__ === Number.prototype) // true
+// console.log(str.__proto__ === String.prototype) // true
+// console.log(Object.prototype.__proto__) // null
+// console.log(Array.prototype.__proto__ === Object.prototype) // true
+// console.log(Function.prototype.__proto__ === Object.prototype) // true
+// console.log(Date.prototype.__proto__ === Object.prototype) // true
+// console.log(RegExp.prototype.__proto__ === Object.prototype) // true
+// console.log(Boolean.prototype.__proto__ === Object.prototype) // true
+// console.log(Number.prototype.__proto__ === Object.prototype) // true
+// console.log(String.prototype.__proto__ === Object.prototype) // true
+
+// console.log('Object.__proto__:', Object.__proto__)
+// console.log('Function.prototype:', Function.prototype)
+// console.log(Object.__proto__ === Function.prototype) // true
+// console.log('obj.toString():', obj.toString()) // [object Object]
+
+// function Player (name) {
+//   this.name = name
+//   // return this // 默认返回this对象
+// }
+// const curry = new Player('curry')
+// console.log('curry:', curry)
+// console.log('curry.__proto__:', curry.__proto__)
+// console.log(curry.__proto__ === Player.prototype) // true
+// console.log('Player.prototype:', Player.prototype)
+// console.log('Player.prototype.__proto__:', Player.prototype.__proto__)
+// console.log(Player.prototype.__proto__ === Object.prototype) // true
+// console.log(Object.prototype.__proto__) // null，Object的隐式原型__proto__指向null
+// console.timeEnd('prototype')
