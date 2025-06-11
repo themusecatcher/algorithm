@@ -1,18 +1,27 @@
-/*
-  通过延迟加载优化白屏时间
-*/
+/**
+ * 延迟执行的钩子函数
+ * 该函数通过延迟加载优化白屏时间
+ * 
+ * @param total - 表示一共有多少个需要延迟执行或加载的任务数量
+ * @returns {function} - 返回一个函数，用于检查是否达到指定的帧数
+ *                       当帧数达到或超过指定值时，返回 true，表示可以执行或进行渲染
+ */
 
 /*
 import { ref } from 'vue'
+const total = ref(0)
 const frame = ref(0)
 function updateFrame() {
-  frame.value++
-  requestAnimationFrame(updateFrame)
+  if (frame.value < total.value) { // 终止调用
+    frame.value++
+    requestAnimationFrame(updateFrame)
+  }
 }
 updateFrame()
-export function useDefer() {
+export function useDefer(total: number) {
+  total.value = total
   return function(n: number) {
-    return frame.value > n
+    return frame.value >= n
   }
 }
 */
@@ -26,6 +35,6 @@ export function useDefer() {
 
 <script setup lang="ts">
 import { useDefer } from 'utils/defer.ts'
-const defer = useDefer()
+const defer = useDefer(100)
 </script>
 */
