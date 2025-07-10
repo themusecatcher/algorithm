@@ -59,3 +59,32 @@ type MyExtract<T, U> = T extends U ? T : never
 
 // 从类型 T 中排除所有可以赋值给 U 的类型成员，生成一个新的联合类型。
 type MyExclude<T, U> = T extends U ? never : T
+
+// 示例
+
+type User = {
+  name: string
+  age: boolean
+  sex: 'boy' | 'girl'
+}
+
+type UserKeys = keyof User // 'name' | 'age' | 'sex'
+type UserProps = User[UserKeys] // string | boolean | 'boy' | 'girl'
+type UserExtract = Extract<User, string> // never
+type UserExclude = Exclude<User, string> // User
+type UserExtract2 = MyExtract<keyof User, string> // 'name' | 'age' | 'sex'
+type UserExclude2 = MyExclude<User[keyof User], string> // boolean
+
+interface Person {
+  name: string
+  age: number
+  height: number
+  weight: string // 不是 number 类型
+  isStudent: boolean
+}
+
+type NumberProperties<T> = {
+  [K in keyof T]: T[K] extends number ? K : never
+}[keyof T]
+// TypeScript 会自动移除 never 类型的属性，生成最终的映射类型
+type PersonNumberProps = NumberProperties<Person> // 'age' | 'height'
