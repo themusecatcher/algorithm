@@ -1,0 +1,17 @@
+.container {
+  font-size: 12px;
+}
+html[data-theme=light] .container {
+  color: "#333";
+  background-color: "#fff";
+}
+html[data-theme=dark] .container {
+  color: "#fff";
+  background-color: "#333";
+}
+html[data-theme=gray] .container {
+  color: "#666";
+  background-color: "#eee";
+}
+
+/*# sourceMappingURL=output.css.map */
