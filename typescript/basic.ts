@@ -34,7 +34,7 @@ enum UserRole {
   Guest = 'GUEST'
 }
 
-const role: UserRole = UserRole.Admin
+const role: UserRole = UserRole.Admin // 'ADMIN'
 
 /* 函数类型 */
 
@@ -73,3 +73,7 @@ type RequiredUser = Required<User> // 所有属性必选
 type ReadonlyUser = Readonly<User> // 只读属性，属性值均不允许修改
 type UserNames = Pick<User, 'name'> // 属性筛选 { name: string }
 type omitUser = Omit<User, 'email' | 'createdAt'> // 属性排除 { id: number, name: string }
+
+type T = 'a' | 'b' | 'c' | 1 | 2
+type excludeT = Exclude<T, string> // 类型排除 1 | 2
+type extractT = Extract<T, string> // 类型提取 'a' | 'b' | 'c'
