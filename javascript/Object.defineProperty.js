@@ -27,7 +27,7 @@ function Observer (obj) {
   })
 }
 
-let player = {
+const player = {
   name: 'Curry',
   age: 34,
   career: {

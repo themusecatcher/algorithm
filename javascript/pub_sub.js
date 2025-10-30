@@ -60,6 +60,8 @@ export class EventBus {
     const onceWrapper = (...args) => {
       try {
         callback(...args)
+      } catch (e) {
+        console.error(`Error in ${event} handler:`, e)
       } finally {
         this.off(event, onceWrapper) // 确保无论是否抛出异常，都自动取消订阅
       }

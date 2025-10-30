@@ -1,8 +1,8 @@
 /*
   1.执行同步代码：所有同步任务按顺序执行，形成调用栈（Call Stack）。
   2.处理异步任务：
-    宏任务：如 setTimeout、setInterval、I/O 操作、XHR 回调、DOM 事件回调（click、scroll 等交互事件）、setImmediate、requestAnimationFrame等，会被推入宏任务队列。
-    微任务：如 Promise.then、catch、finally、async/await、Fetch 回调、process.nextTick、MutationObserver 等，会被推入微任务队列。
+    宏任务：如 setTimeout、setInterval、I/O 操作（文件读写）、XHR 回调（网络请求）、DOM 事件回调（click、scroll等交互事件）、setImmediate、requestAnimationFrame、requestIdleCallback等，会被推入宏任务队列。
+    微任务：如 Promise.then/catch/finally、async/await、Fetch 回调、process.nextTick、MutationObserver、queueMicrotask等，会被推入微任务队列。
   3.调用栈清空后：
     优先执行所有微任务：清空微任务队列中的任务。
     执行一个宏任务：从宏任务队列中取出一个宏任务执行。
