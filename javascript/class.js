@@ -1,8 +1,8 @@
 /*
   类的所有方法都定义在类的 prototype 属性上面
-  constructor() 方法是类的默认方法，通过new命令生成对象实例时，自动调用该方法。
+  constructor() 方法是类的默认方法，通过 new 命令生成对象实例时，自动调用该方法。
   一个类必须有 constructor() 方法，如果没有显式定义，一个空的 constructor() 方法会被默认添加。
-  constructor() 方法默认返回实例对象（即this），也可以指定返回另一个对象（但此时可能导致 instancof 为 false）
+  constructor() 方法默认返回实例对象（即 this），也可以指定返回另一个对象（但此时可能导致 instanceof 为 false）
   类必须使用 new 调用，否则报错
   生成的所有实例共享一个原型对象（p.__proto__ === Point.prototype）
 */
@@ -55,7 +55,7 @@ class Foo {
   static baz () {
     console.log('hello')
   }
-  baz() {
+  baz () {
     console.log('world')
   }
 }
