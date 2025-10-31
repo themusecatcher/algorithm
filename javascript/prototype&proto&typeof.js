@@ -79,7 +79,7 @@ function Person3(name) {
 const person1 = new Person1('curry')
 const person2 = new Person2('curry')
 const person3 = new Person3('curry')
-console.log('person1:', person1.__proto__.__proto__) // Person1 { name: 'curry' }
+console.log('person1:', person1.__proto__.__proto__) // Person1 { name: 'curry' } 实例对象
 console.log('person2:', person2) // { name: 'John' }
 console.log('person3:', person3) // [String: 'hello']
 
