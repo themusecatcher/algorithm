@@ -35,7 +35,7 @@ class MyClass {
     console.log('setter:' + value)
   }
 }
-let inst = new MyClass()
+const inst = new MyClass()
 inst.prop = 123 // setter: 123
 console.log(inst.prop) // 'getter'
 
@@ -61,7 +61,7 @@ class Foo {
 }
 Foo.classMethod() // 'hello'
 
-var foo = new Foo()
+const foo = new Foo()
 // foo.classMethod()// TypeError: foo.classMethod is not a function
 
 Foo.bar() // hello
