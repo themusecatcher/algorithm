@@ -1,8 +1,8 @@
 /*
-  call()方法：第一个参数是要绑定给this的值，后面传入的是一个参数列表。
-  当第一个参数为null、undefined的时候，默认指向window。
-  apply()方法：第一个参数是要绑定给this的值，第二个参数是一个参数数组。
-  当第一个参数为null、undefined的时候，默认指向window。
+  call()方法：第一个参数是要绑定给 this 的值，后面传入的是一个参数列表。
+  当第一个参数为 null、undefined 的时候，默认指向全局对象，具体看执行环境（浏览器：Window, Node: global）
+  apply()方法：第一个参数是要绑定给 this 的值，第二个参数是一个参数数组。
+  当第一个参数为 null、undefined 的时候，默认指向全局对象，具体看执行环境（浏览器：Window, Node: global）
 */
 function add (c, d) {
 	return this.a + this.b + c + d
@@ -18,7 +18,7 @@ var Person2 = function () {
   this.getname = function () {
     console.log(this.name)
   }
-  Person1.call(this) // 使用Person1对象代替this对象
+  Person1.call(this) // 使用 Person1 对象代替 this 对象
 }
 var person = new Person2()
 person.getname() // Curry
