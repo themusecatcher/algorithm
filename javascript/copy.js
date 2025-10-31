@@ -4,64 +4,62 @@
   浅拷贝：创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。
       如果属性是基本类型，拷贝的就是基本类型的值，如果属性是引用类型，拷贝的就是内存地址，
       所以如果其中一个对象改变了这个地址指向的值，就会影响到另一个对象。
-  深拷贝：将一个对象从内存中完整的拷贝一份出来,从堆内存中开辟一个新的区域存放新对象,且修改新对象不会影响原对象。
+  深拷贝：将一个对象从内存中完整的拷贝一份出来，从堆内存中开辟一个新的区域存放新对象，且修改新对象不会影响原对象。
 */
 // 一、Object.assign(target, source)
 // 基本数据类型的复制，是深复制；引用数据类型的复制，是浅复制
 // ①对象复制
 var source = {
-      name: '库里',
-      player: {
-        num: 30,
-        age: 34
-      }
-    }
-var target = {}
-target = Object.assign(target, source)
+  name: '库里',
+  player: {
+    num: 30,
+    age: 34
+  }
+}
+var target = Object.assign(target, source)
 target.name = 'curry' // 基本类型
-target.player.num = 3 // 引用类型，也会改变source
+target.player.num = 3 // 引用类型，也会改变 source
 console.log('source:', source) // { name: '库里', player: { num: 3, age: 34 } }
 console.log('target:', target) // { name: 'curry', player: { num: 3, age: 34 } }
 // ②数组复制
 var source = [
-      '库里',
-      {
-        num: 30,
-        age: 34
-      }
-    ]
-var target = []
-target = Object.assign(target, source)
+  '库里',
+  {
+    num: 30,
+    age: 34
+  }
+]
+var target = Object.assign(target, source)
 target[0] = 'curry' // 基本类型
-target[1].num = 3 // 引用类型，也会改变source
+target[1].num = 3 // 引用类型，也会改变 source
 console.log('source:', source) // [ '库里', { num: 3, age: 34 } ]
 console.log('target:', target) // [ 'curry', { num: 3, age: 34 } ]
 // 二、扩展运算符（…）
 // 基本数据类型的复制，是深复制；引用数据类型的复制，是浅复制
 // ①对象复制
 var source = {
-      name: '库里',
-      player: {
-        num: 30,
-        age: 34
-      }
-    }
+  name: '库里',
+  player: {
+    num: 30,
+    age: 34
+  }
+}
 var target = { ...source }
 target.name = 'curry' // 基本类型
-target.player.num = 3 // 引用类型，也会改变source
+target.player.num = 3 // 引用类型，也会改变 source
 console.log('source:', source) // { name: '库里', player: { num: 3, age: 34 } }
 console.log('target:', target) // { name: 'curry', player: { num: 3, age: 34 } }
 // ②数组复制
 var source = [
-      '库里',
-      {
-        num: 30,
-        age: 34
-      }
-    ]
+  '库里',
+  {
+    num: 30,
+    age: 34
+  }
+]
 var target = [ ...source ]
 target[0] = 'curry' // 基本类型
-target[1].num = 3 // 引用类型，也会改变source
+target[1].num = 3 // 引用类型，也会改变 source
 console.log('source:', source) // [ '库里', { num: 3, age: 34 } ]
 console.log('target:', target) // [ 'curry', { num: 3, age: 34 } ]
 // 三、var target = JSON.parse(JSON.stringify(source))
@@ -70,25 +68,25 @@ console.log('target:', target) // [ 'curry', { num: 3, age: 34 } ]
 // JSON.parse()：将一个 JSON 字符串转换为对象或数组
 // ①对象深复制
 var source = {
-      name: '库里',
-      player: {
-        num: 30,
-        age: 34
-      }
-    }
+  name: '库里',
+  player: {
+    num: 30,
+    age: 34
+  }
+}
 var target = JSON.parse(JSON.stringify(source))
 target.name = 'curry' // 基本类型
-target.player.num = 3 // 引用类型，不会影响source
+target.player.num = 3 // 引用类型，不会影响 source
 console.log('source:', source) // { name: '库里', player: { num: 30, age: 34 } }
 console.log('target:', target) // { name: 'curry', player: { num: 3, age: 34 } }
 // ②数组深复制
 var source = [
-      '库里',
-      {
-        num: 30,
-        age: 34
-      }
-    ]
+  '库里',
+  {
+    num: 30,
+    age: 34
+  }
+]
 var target = JSON.parse(JSON.stringify(source))
 target[0] = 'curry' // 基本类型
 target[1].num = 3 // 引用类型
