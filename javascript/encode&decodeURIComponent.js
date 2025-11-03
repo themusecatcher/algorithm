@@ -6,15 +6,16 @@
 */
 function parseUrl (url) {
   var res = {}
-  var args = url.substr(url.indexOf('?') + 1)
+  var args = url.slice(url.indexOf('?') + 1)
   var argsArr = args.split('&')
   argsArr.forEach(item => {
     // 方法①
     const args = item.split('=')
     res[args[0]] = decodeURIComponent(args[1])
     // 方法②
-    // res[item.substr(0, item.indexOf('='))] = decodeURIComponent(item.substr(item.indexOf('=') + 1))
+    // res[item.slice(0, item.indexOf('='))] = decodeURIComponent(item.slice(item.indexOf('=') + 1))
   })
   return res
 }
 console.log('url:', parseUrl('https://www.genshuixue.com?user=gsx&id=111&name=%E5%BC%A0%E4%B8%89'))
+// url: { user: 'gsx', id: '111', name: '张三' }
