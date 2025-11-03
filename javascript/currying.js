@@ -7,7 +7,7 @@ function currying (fn, ...args) {
     // 拼接参数
     const allArgs = args.concat(rest) // 或 allArgs = [...args, ...rest]
     // 参数个数大于等于 fn.length 时，参数收集完毕，执行函数
-    if (allArgs.length >= fn.length) { // fn.length：fn ，接收的形参个数
+    if (allArgs.length >= fn.length) { // fn.length：fn 接收的形参个数
       return fn.apply(this, allArgs)
     }
     return currying(fn, ...allArgs)
