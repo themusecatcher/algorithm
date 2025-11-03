@@ -5,7 +5,7 @@
   ②第二个参数是 Promise 执行失败时的回调，两个函数只会有一个被调用。
     • 如果执行了 resolve 函数，则会回调 promise 对象的 .then 函数
     • 如果执行了 reject 函数，且 then 函数没有传入第二个参数，则会回调 promise 对象的 .catch 函数
-    • 如果then函数传入了第二个参数（即 reject 时的回调），则 promise 对象的 .catch 函数将无法捕获 reject
+    • 如果 then 函数传入了第二个参数（即 reject 时的回调），则 promise 对象的 .catch 函数将无法捕获 reject
   catch 方法的返回值也是 promise
   无论 promise 状态是 fulfilled 还是 rejected 都会执行一次 finally 方法
 */
@@ -55,9 +55,9 @@ onCheck() // await: true
 
 /*
   Promise.all 方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。
-  p 的状态由 p1、p2、p3 决定，分成两种情况。
-	• （1）只有 p1、p2、p3 的状态都变成 fulfilled，p 的状态才会变成 fulfilled，此时 p1、p2、p3 的返回值组成一个数组，传递给 p 的回调函数。
-  • （2）只要 p1、p2、p3 之中有一个被 rejected，p 的状态就变成 rejected，此时第一个被 reject 的实例的返回值，会传递给 p 的回调函数。
+  p 的状态由 p1、p2、p3 决定，存在以下两种情况:
+  1.只有 p1、p2、p3 的状态都变成 fulfilled，p 的状态才会变成 fulfilled，此时 p1、p2、p3 的返回值组成一个数组，传递给 p 的回调函数。
+  2.只要 p1、p2、p3 之中有一个被 rejected，p 的状态就变成 rejected，此时第一个被 reject 的实例的返回值，会传递给 p 的回调函数。
 */
 const promise1 = Promise.resolve(3) // 等价于 new Promise((resolve, reject) => resolve(3))
 const promise2 = new Promise((resolve, reject) => {
@@ -72,7 +72,7 @@ Promise.resolve(promise4).then(res => {
 }).catch(err => {
   console.log('rej-err:', err) // 捕获
 })
-var pAll = Promise.all([]).then(res => {
+const pAll1 = Promise.all([]).then(res => {
   console.log('all-res:', res)
 }).catch(err => {
   console.log('all-err:', err) // 有 reject 就输出第一个 reject 的结果 Error: fail
@@ -81,7 +81,7 @@ var pAll = Promise.all([]).then(res => {
 // 手写实现 Promise.all() 函数
 const PromiseAll = function (promises) {
   return new Promise((resolve, reject) => {
-    // 判断是否具有 iterator 接口：return typeof promises[Symbol.iterator] === 'function'
+    // 判断是否具有 iterator 接口: typeof promises[Symbol.iterator] === 'function'
     if (typeof promises[Symbol.iterator] !== 'function') {
       reject(`TypeError: ${promises} is not iterable`)
     }
@@ -108,7 +108,7 @@ const p1 = Promise.resolve(3) // 等价于 new Promise((resolve, reject) => reso
 const p2 = true
 const p3 = 'hello'
 // const p4 = Promise.reject('rej')
-pAll = PromiseAll([]).then(res => {
+const pAll2 = PromiseAll([]).then(res => {
   console.log('pAll-res:', res) // [3, true, 'hello']
 }).catch(err => {
   console.log('pAll-err:', err) // 有 reject 就输出第一个 reject 的结果 Error: fail
@@ -117,10 +117,10 @@ pAll = PromiseAll([]).then(res => {
 /*
   Promise.race 方法同样是将多个 Promise 实例，包装成一个新的 Promise 实例。
   只要 p1、p2、p3 之中有一个实例率先改变状态，p 的状态就跟着改变。
-  那个率先改变的 Promise 实例的返回值，就传递给p的返回值。
+  那个率先改变的 Promise 实例的返回值，就传递给 p 的返回值。
   输出第一个获取到的结果，无论是 resolve 还是 reject
 */
-var pRace = Promise.race([promise1, promise2, promise3]).then(res => {
+const pRace1 = Promise.race([promise1, promise2, promise3]).then(res => {
   console.log('race-res:', res)
 }).catch(err => {
   console.log('race-err:', err)
@@ -136,8 +136,8 @@ const PromiseRace = function (promises) {
     if (promises.length === 0) {
       return
     }
-     // 遍历每个 Promise，主 Promise 状态由第一个完成的决定
-     for (const promise of promises) {
+    // 遍历每个 Promise，主 Promise 状态由第一个完成的决定
+    for (const promise of promises) {
       Promise.resolve(promise).then(res => {
         resolve(res)
       }).catch(err => {
@@ -158,12 +158,12 @@ const p6 = new Promise((resolve, reject) => {
   }, 500)
 })
 const p7 = 'hello'
-var pRace = PromiseRace([promise1, promise2, promise3]).then(res => {
+const pRace2 = PromiseRace([promise1, promise2, promise3]).then(res => {
   console.log('pRace-res:', res)
 }).catch(err => {
   console.log('pRace-err:', err)
 })
-var pRace = PromiseRace([]).then(res => {
+const pRace3 = PromiseRace([]).then(res => {
   console.log('pRace-res:', res)
 }).catch(err => {
   console.log('pRace-err:', err)
