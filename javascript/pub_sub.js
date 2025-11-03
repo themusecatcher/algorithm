@@ -1,7 +1,7 @@
-// 发布-订阅模式
+// 发布-订阅模式(pub-sub with map & set)
 export class EventBus {
   constructor() {
-    this.events = {} // 存储事件及其回调列表
+    this.eventsMap = new Map() // 存储事件及其回调列表
   }
   /**
    * 订阅事件
@@ -12,10 +12,10 @@ export class EventBus {
     if (typeof callback !== 'function') {
       throw new Error('Callback must be a function')
     }
-    if (!this.events[event]) {
-      this.events[event] = []
+    if (!this.eventsMap.has(event)) {
+      this.eventsMap.set(event, new Set())
     }
-    this.events[event].push(callback)
+    this.eventsMap.get(event).add(callback)
   }
   /**
    * 发布事件
@@ -23,15 +23,15 @@ export class EventBus {
    * @param {...any} args - 回调函数的参数
    */
   emit(event, ...args) { // ...args：剩余参数语法，用于将所有接收到的参数收集到 args 数组中
-    const callbacks = this.events[event]
-    if (callbacks) {
-      callbacks.forEach(cb => {
+    const callbacksSet = this.eventsMap.get(event)
+    if (callbacksSet) {
+      for (const cb of callbacksSet) {
         try {
           cb(...args) // 同步执行回调，可在此处添加异步逻辑
         } catch (e) {
           console.error(`Error in ${event} handler:`, e)
         }
-      })
+      }
     }
   }
   /**
@@ -43,9 +43,13 @@ export class EventBus {
     if (typeof callback !== 'function') {
       throw new Error('Callback must be a function')
     }
-    const callbacks = this.events[event]
-    if (callbacks) {
-      this.events[event] = callbacks.filter(cb => cb !== callback)
+    const callbacksSet = this.eventsMap.get(event)
+    if (callbacksSet && callbacksSet.has(callback)) {
+      callbacksSet.delete(callback)
+      // 如果该事件的所有回调都被移除，则从 eventsMap 中删除该事件
+      if (callbacksSet.size === 0) {
+        this.eventsMap.delete(event)
+      }
     }
   }
   /**
