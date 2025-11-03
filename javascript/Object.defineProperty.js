@@ -1,5 +1,5 @@
 function defineProperty (obj, key, val) {
-  //如果某对象的属性也是一个对象，递归进入该对象，进行监听
+  // 如果某对象的属性也是一个对象，递归进入该对象，进行监听
   if (typeof val === 'object') {
     Observer(val)
   }
@@ -17,7 +17,7 @@ function defineProperty (obj, key, val) {
     }
   })
 }
-// 实现一个遍历函数Observer
+// 实现一个遍历函数 Observer
 function Observer (obj) {
   if (typeof obj !== 'object' || obj === null) {
     return

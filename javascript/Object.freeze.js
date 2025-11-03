@@ -41,5 +41,5 @@ list[3].name = 'sc'
 console.log('list:', list)
 console.log(Object.isFrozen(list)) // true
 
-// 使用Object.isFrozen()方法判断一个对象是否被冻结。返回表示给定对象是否被冻结的Boolean
+// 使用 Object.isFrozen() 方法判断一个对象是否被冻结。返回表示给定对象是否被冻结的 Boolean
 console.log(Object.isFrozen(player)) // true

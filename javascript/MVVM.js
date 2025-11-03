@@ -1,17 +1,17 @@
 function Vue(options = {}) {
-  // vm.$options Vue上是将所有属性挂载到上面
-  // 我们也和vue相同
+  // vm.$options Vue 上是将所有属性挂载到上面
+  // 我们也和 vue 相同
   this.$options = options;
   // this._data
   let data = this._data = this.$options.data;
 
   observe(data);
-  // this就代理了this._data
+  // this 就代理了 this._data
   for (let key in data) {
     Object.defineProperty(this, key, {
       configurable: true,
       get() {
-        return this._data[key]; // this.a = {a: 1}
+        return this._data[key]; // this.a = { a: 1 }
       },
       set(newVal) {
         this._data[key] = newVal;
@@ -19,18 +19,18 @@ function Vue(options = {}) {
     });
   }
 
-  // 初始化一个computed
+  // 初始化一个 computed
   initComputed.call(this);
 
   // 编译
   new Compile(options.el, this);
-  // 所有事情处理好后执行mounted钩子函数
+  // 所有事情处理好后执行 mounted 钩子函数
   options.mounted.call(this);
 }
 
-function initComputed() {   // 具有缓存功能的
+function initComputed() { // 具有缓存功能的
   let vm = this;
-  let computed = this.$options.computed;  // 从options上拿到computed属性
+  let computed = this.$options.computed;  // 从 options 上拿到computed属性
   Object.keys(computed).forEach(key => {
     Object.defineProperty(vm, key, {    // computed[key]
       get: typeof computed[key] === 'function' ? computed[key] : computed[key].get,
@@ -40,7 +40,7 @@ function initComputed() {   // 具有缓存功能的
   });
 }
 
-// 观察对象，给对象增加Object.defineProperty
+// 观察对象，给对象增加 Object.defineProperty
 // 这里写数据劫持的主要逻辑
 function Observe(data) {
   let dep = new Dep();
