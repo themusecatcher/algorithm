@@ -15,7 +15,7 @@
       当试图访问一个对象的某个属性时，会先在对象自身中寻找，如果对象本身没有这个属性，
       则会去它的隐式原型 __proto__（也即它的构造函数的显式原型 prototype）中寻找，
       如果没有，则会去它的原型的原型中去寻找，直到找到 Object 对象的原型，如果依然没有，则返回 undefined
-    s.__proto__ === Student.prototype  prototype 还有一个 constructor 属性,指向该对象的构造函数本身
+    s.__proto__ === Student.prototype  prototype 还有一个 constructor 属性，指向该对象的构造函数本身
 */
 /*
   new 运算符允许开发人员创建一个用户定义的对象类型的实例或具有构造函数的内置对象的实例。
@@ -53,7 +53,7 @@
 
   构造函数就是一个普通的函数，创建方式和普通函数没有区别，不同的是：
 	· 构造函数习惯上首字母大写
-	· 调用方式的不同，普通函数是直接调用，而构造函数需要使用new关键字来调用。
+	· 调用方式的不同，普通函数是直接调用，而构造函数需要使用 new 关键字来调用。
   function Person () {} // 构造函数，函数都有一个属性prototype（即：Person.prototype）
   var player = new Person() // 对象 player 为实例，对象都有一个属性__proto__（即player.__proto__）
   Person.prototype === player.__proto__ // true
@@ -61,7 +61,7 @@
   new 关键字会进行如下操作：
 	① 创建一个空的简单 JavaScript 对象（即{}），即新的实例对象
 	② 为步骤1新创建的对象添加属性 __proto__ ，将该属性链接至构造函数的原型对象
-	③ 执行构造函数，同时将步骤1新创建的对象绑定为this的上下文（即将this绑定到新创建的对象）
+	③ 执行构造函数，同时将步骤1新创建的对象绑定为 this 的上下文（即将 this 绑定到新创建的对象）
   ④ 如果构造函数返回非原始值，该返回值成为整个 new 表达式的结果。如果未返回任何值或返回原始值，则返回该实例对象。
 */
 function Person1(name) {
@@ -84,12 +84,12 @@ console.log('person2:', person2) // { name: 'John' }
 console.log('person3:', person3) // [String: 'hello']
 
 console.time('prototype')
-const obj = new Object() // 等价于 const obj = {}
-const arr = new Array() // 等价于 const arr = []
-const fn = function () {}
-const date = new Date()
-const reg = new RegExp('at', 'g')
-const err = new Error()
+const obj = new Object() // 等价于 const obj = {} typeof：object
+const arr = new Array() // 等价于 const arr = [] typeof：object
+const fn = function () {} // typeof：function
+const date = new Date() // typeof：object
+const reg = new RegExp('at', 'g') // typeof：object
+const err = new Error() // typeof：object
 const newTru = new Boolean(true) // typeof：oject
 const newNum = new Number(3) // typeof：object
 const newStr = new String('world') // typeof：object
@@ -134,7 +134,7 @@ console.log('obj.toString():', obj.toString()) // [object Object]
 
 function Player (name) {
   this.name = name
-  // return this // 默认返回this对象
+  // return this // 默认返回 this 对象
 }
 const curry = new Player('curry')
 console.log('curry:', curry)
@@ -143,5 +143,5 @@ console.log(curry.__proto__ === Player.prototype) // true
 console.log('Player.prototype:', Player.prototype)
 console.log('Player.prototype.__proto__:', Player.prototype.__proto__)
 console.log(Player.prototype.__proto__ === Object.prototype) // true
-console.log(Object.prototype.__proto__) // null，Object的隐式原型__proto__指向null
+console.log(Object.prototype.__proto__) // null，Object 的隐式原型 __proto__ 指向 null
 console.timeEnd('prototype')
