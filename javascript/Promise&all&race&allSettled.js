@@ -172,7 +172,7 @@ const pRace3 = PromiseRace([]).then(res => {
 /*
   ES11 新增语法 Promise.allSettled()，无论状态是 fulfilled 或 rejected 都会把参数返回
     Promise.allSettled() 静态方法将一个 Promise 可迭代对象作为输入，并返回一个单独的 Promise。
-    当所有输入的 Promise 都已敲定时（包括传入空的可迭代对象时），返回的 Promise 将被兑现，
+    当所有输入的 Promise 都已确定时（包括传入空的可迭代对象时），返回的 Promise 将被兑现，
     并带有描述每个 Promise 结果的对象数组。
 */
 // const pro1 = request('http')
