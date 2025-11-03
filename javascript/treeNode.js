@@ -40,11 +40,11 @@ var treeNode = function (data) {
   if (data.length < 2) return data
   var res = data.filter(item => !item.parent_id) // 找到所有的顶级
   var rest = data.filter(item => item.parent_id) // 得到所以的非顶级
-  function findParent (parent, child, childIndex) { // child找对应的父级
+  function findParent (parent, child, childIndex) { // child 找对应的父级
     const len = parent.length
     for (let i = 0; i < len; i++) {
       const ans = parent[i].id === child.parent_id
-      if (ans) { // 加入children数组中
+      if (ans) { // 加入 children 数组中
         if (parent[i].children) {
           parent[i].children.push(child)
         } else {
@@ -53,7 +53,7 @@ var treeNode = function (data) {
         rest.splice(childIndex, 1)
         return true
       }
-      if (parent[i].children) { // 如果存在children数组，递归找父级
+      if (parent[i].children) { // 如果存在 children 数组，递归找父级
         return findParent(parent[i].children, child, childIndex)
       }
     }

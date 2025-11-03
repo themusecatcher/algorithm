@@ -1,0 +1,30 @@
+//使用scss的math函数，https://sass-lang.com/documentation/breaking-changes/slash-div
+@use 'sass:math';
+
+// 定义主题色
+$theme-color: #1677ff;
+
+// 定义设计稿基准尺寸
+$design-width: 1920;
+$design-height: 1080;
+
+// 定义最小和最大屏幕宽度
+$min-width: 1280px;
+$max-width: 1600px;
+
+// 响应式布局 px 转为 vw 的函数
+@function responsive-vw($px) {
+  $vw-value: math.div($px, $design-width) * 100vw;
+  $min-value: math.div($px, $design-width) * $min-width;
+  $max-value: math.div($px, $design-width) * $max-width;
+  @return clamp($min-value, $vw-value, $max-value);
+}
+// px 转为 vw 的函数
+@function vw($px) {
+  @return math.div($px, $design-width) * 100vw;
+}
+
+// px 转为 vh 的函数
+@function vh($px) {
+  @return math.div($px, $design-height) * 100vh;
+}
