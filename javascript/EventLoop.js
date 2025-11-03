@@ -1,8 +1,10 @@
 /*
   1.执行同步代码：所有同步任务按顺序执行，形成调用栈（Call Stack）。
   2.处理异步任务：
-    宏任务：如 setTimeout、setInterval、I/O 操作（文件读写）、XHR 回调（网络请求）、DOM 事件回调（click、scroll等交互事件）、setImmediate、requestAnimationFrame、requestIdleCallback等，会被推入宏任务队列。
-    微任务：如 Promise.then/catch/finally、async/await、Fetch 回调、process.nextTick、MutationObserver、queueMicrotask等，会被推入微任务队列。
+    宏任务：如 setTimeout、setInterval、I/O 操作（文件读写）、XHR 回调（网络请求）、DOM 事件回调（click、scroll等交互事件）、
+             setImmediate、requestAnimationFrame、requestIdleCallback等，会被推入宏任务队列。
+    微任务：如 Promise.then/catch/finally、async/await、Fetch 回调、process.nextTick、MutationObserver、
+             queueMicrotask 等，会被推入微任务队列。
   3.调用栈清空后：
     优先执行所有微任务：清空微任务队列中的任务。
     执行一个宏任务：从宏任务队列中取出一个宏任务执行。
@@ -110,7 +112,7 @@ async function too () {
   }
 }
 too()
-// 所有 then() 回调都会直接执行，看参数类型决定是加入微任务队列还是立即执行
+// 所有 then() 回调都会直接执行，看参数类型决定是加入微任务队列(回调函数)还是立即执行(非回调函数)
 // then() 方法的返回值始终是 promise，当返回普通数值 1 时，等价于 return Promise.resolve(1)；如果没有返回值，则相当于返回 return Promise.resolve(undefined)
 Promise.resolve('4').then(res => {
   console.log(res) // v3
@@ -129,7 +131,8 @@ console.log('10') // 4
 // 1 5 2 10 3 6 4 9 7 8
 
 /*
-  `then()` 方法的返回值始终是一个 **新的 Promise**，其状态和值由回调函数的执行结果决定。以下是具体规则和示例：
+  `then()` 方法的返回值始终是一个 **新的 Promise**，其状态和值由回调函数的执行结果决定。
+  以下是具体规则和示例：
 
 ### **`then()` 方法的返回值规则**
 1. **回调返回普通值（非 Promise）**  
