@@ -1,3 +1,13 @@
+/**
+ * Promise 的关键特性：
+ * 1.状态不可逆：一旦从 pending 变为 fulfilled 或 rejected，就不能再改变
+ * 2.异步执行：then/catch 的回调总是异步执行
+ * 3.链式调用：每个 then/catch 都返回新的 Promise
+ * 4.值穿透：如果 then 的参数不是函数，值会传递给下一个 then
+ * 5.错误冒泡：错误会一直传递直到被 catch 捕获
+ * 
+ * Promise 的这种状态机制确保了异步操作的可靠性和可预测性，是现代 JavaScript 异步编程的基础。
+ */
 // 手写 Promise
 
 // 定义三种状态常量
