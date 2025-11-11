@@ -31,3 +31,12 @@ console.log('type undef:', Object.prototype.toString.call(undef)) // [object Und
 console.log('type formData:', Object.prototype.toString.call(formData)) // [object FormData]
 // console.log('type file:', Object.prototype.toString.call(file)) // [object File] 二进制文件流（binary）
 // 使用 apply 也一样
+
+const a = Object.create(null) // 创建一个空对象，不继承任何原型链上的属性
+console.log('a', a) // [Object: null prototype] {}
+console.log('a.__proto__', a.__proto__) // undefined
+const b = Object.prototype
+console.log('b', b) // [Object: null prototype] {}
+console.log('b.__proto__', b.__proto__) // null
+console.log('Object.prototype', Object.prototype) // [Object: null prototype] {}
+console.log('Object.prototype.__proto__', Object.prototype.__proto__) // null
