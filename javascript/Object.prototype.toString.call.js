@@ -1,6 +1,7 @@
 const obj = new Object() // 等价于 const obj = {} typeof: oject
 const arr = new Array() // 等价于 const arr = [] typeof: oject
-const fn = function () {} // typeof: function
+const Fn = function () {} // typeof: function
+const fn = new Fn() // typeof: oject Fn 此时为构造函数
 const date = new Date() // typeof: oject
 const reg = new RegExp('at', 'g') // typeof: oject
 const newTru = new Boolean(true) // typeof: oject
@@ -16,7 +17,8 @@ const formData = new FormData() // typeof: object
 formData.set('data', 1)
 console.log('type obj:', Object.prototype.toString.call(obj)) // [object Object]
 console.log('type arr:', Object.prototype.toString.call(arr)) // [object Array]
-console.log('type fn:', Object.prototype.toString.call(fn)) // [object Function]
+console.log('type Fn:', Object.prototype.toString.call(Fn)) // [object Function]
+console.log('type fn:', Object.prototype.toString.call(fn)) // [object Object]
 console.log('type date:', Object.prototype.toString.call(date)) // [object Date]
 console.log('type reg:', Object.prototype.toString.call(reg)) // [object RegExp]
 console.log('type newTru:', Object.prototype.toString.call(newTru)) // [object Boolean]
