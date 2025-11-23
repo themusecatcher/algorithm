@@ -49,7 +49,7 @@ const obj = {
 console.log(transform(obj))
 
 /*
-  最长递增子系列
+  最长递增子系列 LIS（Longest Increasing Subsequence）
   输入：[1, 3, 5, 2, 4, 6, 7]
   输出：[1, 3, 5, 6, 7]
 */
