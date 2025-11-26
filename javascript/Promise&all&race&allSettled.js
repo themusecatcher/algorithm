@@ -8,6 +8,10 @@
     • 如果 then 函数传入了第二个参数（即 reject 时的回调），则 promise 对象的 .catch 函数将无法捕获 reject
   catch 方法的返回值也是 promise
   无论 promise 状态是 fulfilled 还是 rejected 都会执行一次 finally 方法
+
+  resolve 和 reject 方法执行完成后都只会改变 promise 的状态，不会终止函数执行，
+  但不会再影响 promise 的状态，因为 promise 状态一旦改变，就不会再变。
+  如果想阻止后续代码的执行，可以使用 return
 */
 function request (url) {
   return new Promise((resolve, reject) => {
