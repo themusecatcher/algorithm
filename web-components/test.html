@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <a-switch default-checked="true"></a-switch>
+    <template id="a-switch-template">
+      <style>
+        .switch {
+          display: flex;
+        }
+        .switch-core {
+          position: relative;
+          width: 50px;
+          height: 25px;
+          border-radius: 15px;
+          background-color: #ccc;
+          margin: 0 10px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+        
+        .switch-core.checked {
+          background-color: #1677ff;
+        }
+
+        .switch-action { 
+          position: absolute;
+          width: 21px;
+          height: 21px;
+          border-radius: 50%;
+          background-color: #fff;
+          top: 2px;
+          left: 2px;
+          transition: left 0.3s;
+        }
+
+        .switch-core.checked .switch-action {
+          left: 27px;
+        }
+      </style>
+      <div class="switch">
+        <span class="left"><slot name="close"></slot></span>
+        <div class="switch-core ${this.state.checked ? 'checked' : ''}">
+          <div class="switch-action"></div>
+        </div>
+        <span class="right"><slot name="open"></slot></span>
+      </div>
+    </template>
+    <script src="./a-switch.js"></script>
+  </body>
+</html>
