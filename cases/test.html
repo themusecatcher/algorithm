@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    const backupDomains = [
+      '31543253245.com',
+      'sdfasdfasdf.com',
+      'backup.com'
+    ]
+    const nextDomain = {}
+    window.addEventListener('error', (e) => {
+      if (e instanceof ErrorEvent || e.target.tagName !== 'SCRIPT') {
+        return
+      }
+      const url = new URL(e.target.src)
+      // console.log('url', url)
+      const pathname = url.pathname
+      if (!nextDomain[pathname]) {
+        nextDomain[pathname] = 0 // 从索引 0 对应的域名开始尝试
+      }
+      const index = nextDomain[pathname]
+      if (index >= backupDomains.length) {
+        return
+      }
+      const domain = backupDomains[index]
+      url.hostname = domain
+      const newUrl = url.toString()
+      console.log('newUrl', newUrl)
+      document.write(`<script src="${newUrl}"><\/script>`) // 阻塞页面式加入 script，保证脚本执行顺序
+      // 非阻塞脚本式加入方式，会导致脚本执行顺序异常
+      // const script = document.createElement('script')
+      // script.src = newUrl
+      // e.target.parentElement.insertBefore(script, e.target)
+      nextDomain[pathname]++
+      console.log('error', e)
+    }, { capture: true })
+  </script>
+</head>
+<body>
+  <script src="http://www.example.com/js/1.js"></script>
+  <script src="http://www.example.com/js/2.js"></script>
+  <script src="http://www.example.com/js/3.js"></script>
+</body>
+</html>
